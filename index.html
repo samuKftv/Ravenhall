@@ -142,6 +142,47 @@ tr:last-child td{border-bottom:0}
 .story .acts{display:flex;gap:8px;flex-wrap:wrap}
 .prog{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
 .msg-ok{color:var(--ok);font-size:14.5px}.msg-bad{color:var(--bad);font-size:14.5px}
+/* screenplay */
+.g-top{display:grid;gap:12px;max-width:72ch;margin-inline:auto;width:100%}
+.g-chips{display:flex;flex-wrap:wrap;gap:6px}
+.g-chip{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+.g-chip:hover{border-color:var(--gold);color:var(--gold)}
+.g-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.g-filter select{font:inherit;font-size:15px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:6px 10px;max-width:100%}
+.guion{max-width:72ch;margin-inline:auto;width:100%;display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:clamp(18px,4vw,40px)}
+.guion h3.g-act{font-size:clamp(24px,4vw,30px);color:var(--gold);text-align:center;border-block:1px solid var(--line);padding-block:10px;margin-top:22px;scroll-margin-top:80px}
+.guion h3.g-act:first-child{margin-top:0}
+.guion h4{font-family:var(--f-mono);font-weight:500;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:12px}
+.guion h4.g-scene{border-left:3px solid var(--gold);padding-left:10px}
+.guion .g-dlg{display:grid;gap:2px;margin-inline:clamp(0px,8%,70px);padding:4px 10px;border-radius:4px}
+.guion .g-name{font-family:var(--f-mono);font-size:13px;letter-spacing:.1em;text-align:center}
+.guion .g-par{display:block;text-align:center;font-style:italic;color:var(--muted);font-size:15px}
+.guion .g-dlg .g-par{text-align:center}
+.guion .g-note{border-left:3px solid var(--line);padding:6px 12px;color:var(--muted);font-size:15px;background:var(--bg)}
+.guion .g-end{font-family:var(--f-display);color:var(--gold);text-align:center;font-size:20px}
+.guion table{min-width:560px}
+.guion .hl{background:color-mix(in srgb,var(--gold) 16%,transparent);outline:1px solid color-mix(in srgb,var(--gold) 50%,transparent)}
+.guion.filtering .g-dlg:not(.hl){opacity:.55}
+
+/* fichas */
+.fx-how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.fx-how code{font-family:var(--f-mono);font-size:13px;color:var(--gold)}
+.fx-login{border:1px dashed var(--gold);border-radius:4px;padding:18px;display:grid;gap:12px;background:var(--surface);max-width:520px;width:100%;margin-inline:auto}
+.fx-login .row{display:grid;gap:4px}
+.fx-login input,.fx-login select{font:inherit;font-size:16px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:8px 10px;width:100%}
+.fx-head{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px}
+.fx-head h2{font-size:clamp(26px,5vw,38px)}
+.fx-acts{display:flex;flex-wrap:wrap;gap:8px}
+a.btn{text-decoration:none;display:inline-block}
+.fx-block{display:grid;gap:10px}
+.fx-block h3{font-size:20px;color:var(--gold)}
+.mood{columns:3 200px;column-gap:10px}
+.mood a{display:block;break-inside:avoid;margin-bottom:10px;border-radius:4px;overflow:hidden;border:1px solid var(--line);background:var(--raise)}
+.mood img{display:block;width:100%;height:auto;min-height:60px}
+.mood.big{columns:2 280px}
+.fx-card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--fc);border-radius:4px;padding:16px;display:grid;gap:12px}
+.fx-card h3{font-size:22px}
+.fx-teacher{border:1px solid var(--gold);border-radius:4px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:var(--surface)}
 </style>
 
 </head>
@@ -155,9 +196,11 @@ tr:last-child td{border-bottom:0}
 
   <nav class="tabs" role="tablist" aria-label="Secciones">
     <button role="tab" id="t-historia" aria-controls="p-historia" aria-selected="true">La historia</button>
+    <button role="tab" id="t-guion" aria-controls="p-guion" aria-selected="false">El guion</button>
     <button role="tab" id="t-familias" aria-controls="p-familias" aria-selected="false">Los números</button>
     <button role="tab" id="t-reparto" aria-controls="p-reparto" aria-selected="false">Reparto</button>
     <button role="tab" id="t-personaje" aria-controls="p-personaje" aria-selected="false">Tu personaje</button>
+    <button role="tab" id="t-fichas" aria-controls="p-fichas" aria-selected="false">Fichas</button>
   </nav>
 
   <section role="tabpanel" id="p-historia" aria-labelledby="t-historia">
@@ -171,6 +214,325 @@ tr:last-child td{border-bottom:0}
     <h2 style="text-align:center;font-size:26px;margin-top:10px">Estética común</h2>
     <p class="note" style="text-align:center">Obligatoria para todo el reparto.</p>
     <div class="est" id="estetica"></div>
+  </section>
+
+  <section role="tabpanel" id="p-guion" aria-labelledby="t-guion" hidden>
+    <div class="g-top">
+      <p class="note">Este es el guion de la película que vamos a caracterizar. Léelo entero: tu personaje aparece en varias escenas y su aspecto tiene que funcionar en todas ellas.</p>
+      <nav class="g-chips" aria-label="Actos"><a class="g-chip" href="#acto-0">Ficha de la producción</a><a class="g-chip" href="#acto-1">Acto I</a><a class="g-chip" href="#acto-2">Acto II</a><a class="g-chip" href="#acto-3">Acto III</a><a class="g-chip" href="#acto-4">Acto IV</a><a class="g-chip" href="#acto-5">Acto V</a></nav>
+      <div class="g-filter"><label class="label" for="g-pj">Resaltar las frases de</label>
+        <select id="g-pj"><option value="">Nadie</option></select></div>
+    </div>
+    <article class="guion" id="guion">
+<h3 class="g-act" id="acto-0">Ficha de la producción</h3>
+<p class="g-act-line"><b>Título:</b> <i>Circo Ravenhall, 1899</i><br><b>Producción:</b> Las Indias Films<br><b>Formato:</b> largometraje de fantasía gótica y misterio. Cinco actos, una sola noche y un solo escenario.<br><b>Versión:</b> borrador 1, para revisión del departamento de caracterización.</p>
+<p class="g-act-line"><b>Logline.</b> La noche del 31 de octubre de 1899, el Circo Ravenhall da su última función en un pueblo pesquero del norte de Inglaterra. Su fundador ha prometido quemar los contratos que convirtieron a diez artistas en prodigios a cambio de su juventud, su rostro o su humanidad. A mitad del espectáculo, la carpa arde por las cuatro esquinas a la vez. Al amanecer, Cornelius Ravenhall está muerto en el centro de la pista y su baúl de contratos, vacío. Alguien cerró las salidas. Pero la verdadera pregunta es otra: qué pensaba hacer Cornelius con ellos esa noche.</p>
+<h4 class="g-sub">Reparto</h4>
+<div class="tablewrap"><table><tr><th>Número</th><th>Personaje</th><th>Quién es</th><th>Diseño de caracterización</th></tr><tr><td>Dirección</td><td><b>Cornelius Ravenhall</b></td><td>El fundador del circo. Viejo y enfermo. Aparenta 80 años.</td><td>Departamento</td></tr><tr><td>Los payasos</td><td><b>Edmund Ravenhall, «Pierrot»</b></td><td>El payaso triste. Mudo en escena y fuera de ella. Hijo de Cornelius. Aparenta 30; tiene 30.</td><td>Por asignar</td></tr><tr><td>Los payasos</td><td><b>Augusta Montenegro</b></td><td>La payasa augusta. Aparenta 40; tiene 22.</td><td>Ainara</td></tr><tr><td>Los fenómenos</td><td><b>Belladonna</b></td><td>La mujer barbuda. Aparenta 15; tiene 50.</td><td>Carla</td></tr><tr><td>Los fenómenos</td><td><b>Tharm Jade, «Sskslis Tharm»</b></td><td>El hombre lagarto. Aparenta 32.</td><td>Yraya</td></tr><tr><td>Los acróbatas</td><td><b>Rosalind Vane, «La Golondrina»</b></td><td>La trapecista. Aparenta 20; tiene 31.</td><td>Por asignar</td></tr><tr><td>Los acróbatas</td><td><b>Ilya Sokólov, «El Hombre de Goma»</b></td><td>El contorsionista. Aparenta 25; tiene 25.</td><td>Por asignar</td></tr><tr><td>Los domadores</td><td><b>Agnes</b></td><td>La domadora de leones. Aparenta 25; tiene 25.</td><td>Elena</td></tr><tr><td>Los domadores</td><td><b>Lucien Varg</b></td><td>El hombre fiera. Aparenta 38; tiene más de cien.</td><td>Iara May</td></tr><tr><td>El ilusionismo</td><td><b>Madame Voltairine Davenport</b></td><td>La adivina. Aparenta 28; tiene 43.</td><td>Marina</td></tr><tr><td>El ilusionismo</td><td><b>Madame Eclipse (Élodie Moreau)</b></td><td>La directora de pista. Aparenta 27; tiene 57.</td><td>Jenifer</td></tr></table></div>
+<p class="g-act-line"><b>Lugar único:</b> el Circo Ravenhall, instalado en un descampado junto al puerto de Saltmarsh. Tiene la carpa principal de lona a rayas con su pista de serrín, los camerinos de lona detrás del telón, la zona de jaulas, el círculo de carromatos y el carromato de Cornelius, que hace de despacho.</p>
+<p class="g-act-line"><b>Convención de caracterización:</b> cada personaje tiene dos estados. <b>Estado A</b> es su aspecto en la pista, antes del incendio. <b>Estado B</b> es su aspecto tras el incendio, cuando el hechizo de los contratos se rompe. El cambio de A a B ocurre en la escena 9; desde ahí todos permanecen en estado B hasta el final.</p>
+<h3 class="g-act" id="acto-1">Acto I · La última función</h3>
+<h4 class="g-scene">Escena 1. EXT. DESCAMPADO JUNTO AL PUERTO DE SALTMARSH — ATARDECER</h4>
+<p class="g-act-line">Niebla de mar. Gaviotas. Un descampado de hierba rala junto a los muelles, y en medio, la carpa del Circo Ravenhall: lona a rayas rojas y crema, remendada mil veces, con un banderín negro en lo alto que dice RAVENHALL en letras doradas desconchadas. Alrededor, en círculo, los carromatos pintados de la compañía.</p>
+<p class="g-act-line">En la valla, un cartel nuevo pegado sobre otros viejos: «ULTIMA FUNCIÓN. 31 DE OCTUBRE. NO VOLVERÁ A VERSE NADA IGUAL».</p>
+<p class="g-act-line">Los vecinos de Saltmarsh hacen cola con la ropa de domingo. Niños con la nariz pegada a las jaulas. Desde dentro llega un rugido.</p>
+<p class="g-act-line">De un carromato negro con un cuervo pintado en la puerta baja, muy despacio, <b>CORNELIUS RAVENHALL</b>: muy viejo, encorvado, chistera alta, levita roja con los bordados de oro gastados, un bastón con el pomo en forma de cabeza de cuervo. Tose en un pañuelo. El pañuelo sale manchado de negro, como de hollín.</p>
+<p class="g-act-line">Se yergue al ver a la gente. Sonríe. Por un instante parece veinte años más joven.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span><span class="g-par">(al público de la cola, con voz de pista)</span>Señoras, señores. Esta noche, por última vez, verán lo imposible. Y mañana… mañana ya no habrá Ravenhall.</div>
+<p class="g-act-line">Aplausos. Cornelius vuelve a su carromato. Al subir el escalón se le escapa una mueca de dolor.</p>
+<h4 class="g-scene">Escena 2. INT. CARROMATO DE CORNELIUS — ATARDECER</h4>
+<p class="g-act-line">Un despacho minúsculo: un escritorio lleno de papeles, carteles antiguos del circo clavados en las paredes, una lámpara de gas. En el suelo, un baúl de viaje grande, forrado de cuero negro, con cantoneras de latón. Tiene la tapa abierta.</p>
+<p class="g-act-line"><b>AUGUSTA MONTENEGRO</b> está arrodillada junto al baúl. Peluca naranja tipo afro, sombrerito de copa roto, maquillaje blanco grueso y agrietado sobre una cara que aparenta cuarenta años. Sonrisa negra pintada de oreja a oreja. Guantes blancos enormes. Vestido a cuadros amarillos y rojos con mil remiendos y zapatos talla 50.</p>
+<p class="g-act-line">Saca un pergamino con su nombre. Lo desenrolla. Lee. Se le borra la sonrisa de debajo de la sonrisa pintada.</p>
+<p class="g-act-line"><i>Inserto. El contrato: «Augusta Montenegro. Hacer reír a todo aquel que la mire. A cambio: SU VIDA». La palabra «juventud» está tachada.</i></p>
+<p class="g-act-line">Voces fuera. Augusta mete el contrato en el baúl, cierra la tapa y se esconde tras una cortina, con los zapatos gigantes recogidos para que no asomen.</p>
+<p class="g-act-line">Entra Cornelius. Detrás, en brazos de <b>LUCIEN VARG</b>, entra <b>MADAME VOLTAIRINE DAVENPORT</b>, la adivina. Lucien la deja con cuidado en una silla y sale sin decir nada.</p>
+<p class="g-act-line">Voltairine: guapa, cintura de avispa, manos esqueléticas. Maquillaje morado en los ojos, labios rojos. Pelo largo, negro y rizado bajo un pañuelo morado. Vestido morado y negro con camafeos y joyería dorada; un chal gris sobre los hombros. Las piernas, inmóviles bajo la falda. Castañetea los dientes.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span>Necesito una profecía esta noche, Voltairine. Una sola. Que cuando yo abra el baúl, nadie salga de la pista. Que les traerá mala suerte.</div>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span>¿Y por qué iba a traerles mala suerte?</div>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span>Porque tú lo dirás. Y a ti te creen.</div>
+<p class="g-act-line">Voltairine le coge la mano sin pedir permiso. Recorre las líneas con un dedo. Lo mira fijamente. Deja de castañetear los dientes.</p>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span>Aquí hay fuego.</div>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span><span class="g-par">(retira la mano)</span>En un circo siempre hay fuego.</div>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span>No. No voy a decirlo. Búscate a otra adivina.</div>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span><span class="g-par">(muy tranquilo)</span>Te di un techo cuando no tenías ni piernas para escapar. Ah, no. Las piernas te las quité yo.</div>
+<p class="g-act-line">Voltairine aprieta los labios. Levanta un dedo hacia él y murmura algo en voz baja, muy rápido. Una maldición. Cornelius se ríe, tose, y la tos le dobla.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span><span class="g-par">(sin aire)</span>Llegas cuarenta años tarde para maldecirme, querida.</div>
+<p class="g-act-line">Sale a llamar a Lucien. Al girarse, del bolsillo de la levita cae al suelo una llave grande de hierro. Nadie la oye caer.</p>
+<p class="g-act-line">Tras la cortina, un guante blanco enorme se estira, coge la llave y desaparece.</p>
+<h4 class="g-scene">Escena 3. INT. CAMERINOS, DETRÁS DEL TELÓN — NOCHE</h4>
+<p class="g-act-line">Un pasillo de lona dividido con biombos. Espejos con bombillas fundidas, polvos de arroz, plumas, pelucas en sus soportes. Ruido del público al otro lado. Todos se preparan en silencio.</p>
+<p class="g-act-line"><b>EDMUND RAVENHALL, «PIERROT»</b>, el payaso triste, se pinta frente al espejo. Rostro blanco impecable, cejas negras muy altas, labios negros y finos, una lágrima negra bajo el ojo izquierdo. Gorro negro ajustado que esconde todo el pelo. Blúsa blanca con pompones negros y gorguera. Guantes blancos pequeños, hechos a medida, con una lágrima negra bordada en el puño. No habla. Nunca habla.</p>
+<p class="g-act-line">A su lado, <b>ROSALIND VANE, «LA GOLONDRINA»</b>, la trapecista, se venda las muñecas. Pelirroja, moño apretadísimo con plumas azules. Piel perfecta, empolvada con polvo de perla. Maillot de lentejuelas azul pavo real. Se clava una horquilla en el cuero cabelludo sin pestañear.</p>
+<p class="g-act-line">En el suelo, <b>ILYA SOKÓLOV, «EL HOMBRE DE GOMA»</b>, el contorsionista, calienta: cabeza afeitada, ojos delineados de negro, cuerpo fibroso y brillante de aceite, malla negra y azul. Se dobla hacia atrás hasta apoyar la barbilla en el suelo, entre los talones. Le crujen todas las articulaciones a la vez. No le duele.</p>
+<div class="g-dlg" data-pj="ILYA"><span class="g-name">ILYA</span><span class="g-par">(desde el suelo, con acento ruso)</span>Cuando sea libre me voy a París. Voy a sentarme en una silla. Como una persona normal. Y no me voy a levantar en un año.</div>
+<div class="g-dlg" data-pj="ROSALIND"><span class="g-name">ROSALIND</span>Yo me voy a América. Lejos. Donde nadie haya visto nunca un circo.</div>
+<p class="g-act-line">Tras un biombo, sentada en un baúl, los escucha <b>BELLADONNA</b>, la mujer barbuda. Aparenta quince años. Piel muy pálida, mejillas sonrosadas, pecas pintadas, labios rojos con una sonrisa un poco torcida. Dos coletas desiguales con cintas rojas. Una barba larga y espesa, castaña, con trenzas irregulares, lacitos y cuentas de colores; un mechón blanco como la nieve. Vestido de muñeca crema y burdeos, medias distintas, zapatos gastados. Las uñas pintadas de colores, con pegatinas de estrellas.</p>
+<p class="g-act-line">Se balancea sobre los talones. Deja de balancearse.</p>
+<div class="g-dlg" data-pj="BELLADONNA"><span class="g-name">BELLADONNA</span>¿Y después nos vamos a ver?</div>
+<p class="g-act-line">Silencio. Ilya y Rosalind se miran.</p>
+<div class="g-dlg" data-pj="ROSALIND"><span class="g-name">ROSALIND</span>Claro, pequeña. Alguna vez.</div>
+<p class="g-act-line">Belladonna se esconde detrás de su barba como si fuera una manta. Los mechones de la barba se mueven solos y se le enroscan alrededor de los brazos, como un abrazo.</p>
+<p class="g-act-line">En el espejo de enfrente se refleja <b>THARM JADE, «SSKSLIS THARM»</b>, el hombre lagarto. Sin camisa, cuerpo musculoso cubierto de escamas verdes, pelo largo y engominado hacia atrás, ojos amarillos. Se rasca despacio las escamas del dorso de la mano. No mira a nadie a los ojos.</p>
+<div class="g-dlg" data-pj="THARM"><span class="g-name">THARM</span>Si de verdad los quema.</div>
+<p class="g-act-line">Entra <b>MADAME ECLIPSE</b>, la directora de pista. Espalda recta, piel clara, ojos muy marcados en negro, labios rojos. Pelo negro y brillante en un recogido alto victoriano. Chaqueta entallada roja y burdeos con botones de oro, corsé negro, pantalón de montar, botas altas, guantes oscuros con detalles dorados. Un látigo enrollado en la cadera. Todos se callan.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Diez minutos. Y nadie sale a la pista con dudas. Las dudas se notan desde la grada.</div>
+<p class="g-act-line">Belladonna espera a que se vayan. Se acerca la barba a la boca y le susurra algo. No se oye. Solo vemos sus labios.</p>
+<p class="g-note"><i>Nota de producción: el susurro no se subtitula. El público lo leerá en sus labios cuando se repita en la escena 12.</i></p>
+<h4 class="g-scene">Escena 4. EXT. ZONA DE JAULAS — NOCHE</h4>
+<p class="g-act-line">Tres jaulas con ruedas, iluminadas por antorchas. Dos leones y un lobo gris enorme.</p>
+<p class="g-act-line"><b>AGNES</b>, la domadora de leones, reparte la carne a mano, descalza sobre el barro. Pelo negro en una coleta trenzada alta. Arañazos antiguos en la cara que ya parecen cicatrices. Uñas de manos y pies en forma de garra. Pantalón ajustado de cuero rojo óxido con detalles dorados, corsé rígido de oro. Un látigo negro al cinto. Camina como un gato: despacio, sin hacer ruido.</p>
+<p class="g-act-line">El león más viejo ruge. Agnes le ruge de vuelta. El león se calla.</p>
+<p class="g-act-line">Lucien Varg la observa desde la jaula del lobo. Alto, rostro anguloso y pálido, ojeras grises, labios color vino, ojos ámbar. Pelo castaño oscuro hacia atrás, con un mechón plateado en la sien izquierda. Levita rojo oxidado con bordados de oro viejo, chistera, guantes negros, anillos antiguos. Un medallón de latón al cuello. Se ajusta tres veces el guante izquierdo. Después toca con suavidad el hocico del lobo.</p>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>No hace falta gritarles.</div>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>A mí me enseñaron así.</div>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>Te enseñó él.</div>
+<p class="g-act-line">Agnes deja de repartir carne.</p>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>He leído mi contrato entero. Hay una cláusula al final, en letra pequeña. Si el contrato se rompe antes de tiempo, lo que te dio no se va. Se queda. Y se come lo que queda de ti.</div>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>¿Y qué queda de ti, Lucien?</div>
+<p class="g-act-line">Lucien no contesta. Tras ellos, apoyada en una jaula, Madame Eclipse lo ha oído todo. Se acaricia despacio el mango del látigo.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Entonces esta noche no le dejaremos quemar nada hasta que nos diga qué pone en la letra pequeña.</div>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>¿Y si no quiere?</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>A las fieras se las doma.</div>
+<p class="g-act-line">Lucien se fija en la cara de Madame Eclipse a la luz de la antorcha, como si la reconociera de algo. Se toca el medallón.</p>
+<h4 class="g-scene">Escena 5. INT. CARPA PRINCIPAL, PISTA — NOCHE</h4>
+<p class="g-act-line">Gradas llenas. Luz de gas y antorchas. Serrín dorado. Una orquesta de cuatro músicos desafinados.</p>
+<p class="g-act-line">Madame Eclipse entra a caballo en la pista, chasquea el látigo y el público enmudece.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>¡Saltmarsh! Esta noche, el Circo Ravenhall se despide. Y como en todas las despedidas, alguien va a llorar.</div>
+<p class="g-note"><i>Nota de producción: montaje rápido de los números, de unos 2 minutos. Cada personaje tiene un plano a cuerpo entero en estado A, para que el público lo memorice antes del incendio.</i></p>
+<p class="g-act-line"><b>Montaje:</b></p>
+<p class="g-act-line">Edmund, solo en el centro de la pista, finge subir una escalera que no existe. Al llegar arriba, finge caer. El público llora de verdad, sin saber por qué.</p>
+<p class="g-act-line">Augusta le persigue con una cerilla gigante de utilería. Tropieza, cae, se levanta, vuelve a caer. Las carcajadas son ensordecedoras. Ella no se ríe.</p>
+<p class="g-act-line">Rosalind vuela de un trapecio a otro sin red. Al final, se suelta y cae en picado, y Ilya la atrapa en el último segundo con los pies.</p>
+<p class="g-act-line">Ilya se mete entero en una caja de sombreros. La cierran. La abren: está vacía. Sale de un baúl al otro lado de la pista.</p>
+<p class="g-act-line">La barba de Belladonna se estira sola y atrapa en el aire las manzanas que le lanza el público.</p>
+<p class="g-act-line">Tharm se arranca la cola delante de todos. Un niño grita.</p>
+<p class="g-act-line">Agnes hace saltar a los leones a través de un aro de fuego. Lucien, sin látigo, solo mira al lobo a los ojos: «La última mirada». El lobo se tumba y le ofrece el cuello.</p>
+<p class="g-act-line">Por último, Lucien lleva en brazos a Voltairine hasta una silla dorada en el centro de la pista. Un foco la ilumina. Un pescador grita desde la grada.</p>
+<div class="g-dlg" data-pj="PESCADOR"><span class="g-name">PESCADOR</span>¡¿Volverá mi barco?!</div>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span><span class="g-par">(sin pensarlo)</span>Volverá el martes.</div>
+<p class="g-act-line">Aplausos. Voltairine mira hacia las sombras, donde Cornelius la observa. No dice la profecía que él le pidió. Cornelius aprieta el pomo del bastón.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>¡Intermedio!</div>
+<h3 class="g-act" id="acto-2">Acto II · El fuego</h3>
+<h4 class="g-scene">Escena 6. INT. CARROMATO DE CORNELIUS — NOCHE</h4>
+<p class="g-act-line">Durante el intermedio. La lámpara de gas, muy baja. Tharm entra sin hacer ruido y cierra la puerta.</p>
+<p class="g-act-line">Rebusca en el escritorio. Cajones, carpetas. Nada. Va al baúl: está cerrado con un candado. Lo rodea. Pasa las garras por el forro de cuero y nota algo: un doble fondo. Encuentra el resorte. Se abre una ranura.</p>
+<p class="g-act-line">Dentro solo hay un pergamino, más viejo que los demás, con un sello de lacre negro. Tharm lo desenrolla a medias. Lo vemos de refilón: «Contrato maestro», y debajo, la firma de Cornelius en tinta marrón.</p>
+<p class="g-act-line">Sobre el escritorio, bajo un pisapapeles con forma de cuervo, un cuaderno abierto. Tharm lo hojea. En una página, un plano de la carpa: cuatro cruces rojas, una en cada esquina. Y una anotación con letra temblorosa.</p>
+<p class="g-act-line"><i>Inserto. El cuaderno: «Medianoche. Los diez dentro del círculo. Los contratos ardiendo en mi mano, uno a uno, diciendo su nombre. Lo que me dieron volverá a mí».</i></p>
+<p class="g-act-line">Tharm deja de rascarse las escamas.</p>
+<p class="g-act-line">Pasos fuera. Tharm arranca la página del cuaderno, se la guarda en el pantalón y se pega a la pared, junto a la puerta. El pergamino maestro se le queda en la mano.</p>
+<p class="g-act-line">Se abre la puerta. Una mano con guante blanco pequeño deja algo sobre el escritorio: la chistera de repuesto de Cornelius. La puerta se cierra.</p>
+<p class="g-act-line">Tharm respira. Vuelve a meter el contrato maestro en el doble fondo, cierra la ranura y sale por la ventana.</p>
+<h4 class="g-scene">Escena 7. INT. CARPA PRINCIPAL, PISTA — NOCHE</h4>
+<p class="g-act-line">Fin del intermedio. Los diez artistas forman un semicírculo en el borde de la pista, como en la presentación final. Falta Voltairine: la dejaron en los camerinos durante el intermedio y nadie ha vuelto a buscarla.</p>
+<p class="g-act-line">Dos mozos arrastran el baúl de cuero negro hasta el centro de la pista. Cornelius avanza apoyado en el bastón. Se quita la chistera. El público aplaude.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span>Cuarenta años. Cuarenta años les he traído lo imposible. Y lo imposible tiene un precio, que estos artistas han pagado sin quejarse.</div>
+<p class="g-par"><i>(se vuelve hacia la compañía)</i></p>
+<p class="g-act-line">Esta noche os lo devuelvo. Cuando acabe la función, aquí mismo, quemaré vuestros contratos. Uno a uno. Quedaos en la pista. Quiero que lo veáis.</p>
+<p class="g-act-line">Los artistas se miran. Belladonna se balancea sobre los talones, feliz. Madame Eclipse no aparta los ojos del baúl. Lucien se ajusta el guante izquierdo tres veces.</p>
+<p class="g-act-line">Cornelius saca una llave pequeña, abre el candado y levanta la tapa. Dentro, un fajo de pergaminos atados con cinta roja.</p>
+<p class="g-act-line">Pero antes de cerrar el discurso, Cornelius hace una seña hacia la orquesta. Redoble.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span>Y ahora… ¡la payasa augusta!</div>
+<p class="g-act-line">Augusta entra con la cerilla gigante de utilería. Hoy ha preparado otro número: sin caídas, sin golpes. Se coloca en el centro, junto al baúl, y abre la boca para hablar en serio por primera vez.</p>
+<p class="g-act-line">El público ya se está riendo.</p>
+<p class="g-act-line">Augusta se queda callada. Aprieta la nariz roja que lleva en la mano.</p>
+<p class="g-act-line">En ese momento, en las cuatro esquinas de la carpa, a la vez, la lona empieza a arder.</p>
+<h4 class="g-scene">Escena 8. INT. CARPA PRINCIPAL — CONTINUACIÓN</h4>
+<p class="g-note"><i>Nota de producción: escena de unos 90 segundos, rodada cámara en mano entre el humo. Los personajes todavía están en estado A, pero cada plano añade hollín, sudor y desgarros.</i></p>
+<p class="g-act-line">Gritos. El público se lanza hacia la entrada principal. La lona en llamas cae a jirones sobre las gradas.</p>
+<p class="g-act-line">Todos miran a Augusta, con la cerilla gigante en la mano en el centro de la pista. Ella la suelta como si quemara.</p>
+<p class="g-act-line">Un grito de Ilya: «¡No ha sido ella!». Pero Ilya ya no está en el semicírculo.</p>
+<p class="g-act-line">Belladonna corre hacia la salida lateral izquierda. Sus labios repiten el susurro de la escena 3. Su barba se dispara sola: se estira, se enrosca en los postes de la salida, en la de la derecha, en los nudos de la lona, y las cierra como una red. Belladonna tira de ella. La barba no la suelta.</p>
+<p class="g-act-line">Agnes abre las jaulas. Los leones huyen hacia la entrada principal, abriendo paso entre el público.</p>
+<p class="g-act-line">Lucien corre hacia la jaula del lobo. Una explosión (un bidón de petróleo escondido bajo las gradas) lo lanza contra los barrotes. Queda inmóvil.</p>
+<p class="g-act-line">Rosalind, que se había subido al trapecio para escapar del humo, mira hacia abajo. Vemos su plano: el centro de la pista, el baúl abierto, Cornelius de pie junto a él.</p>
+<p class="g-act-line">Cornelius no huye. Con el fajo de contratos en la mano, en mitad del humo, levanta el primer pergamino hacia las llamas.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span><span class="g-par">(gritando)</span>¡Agnes!</div>
+<p class="g-act-line">El primer contrato prende. Agnes, en las jaulas, cae de rodillas como si le hubieran dado un golpe en el pecho.</p>
+<div class="g-dlg" data-pj="CORNELIUS"><span class="g-name">CORNELIUS</span>¡Tharm Jade!</div>
+<p class="g-act-line">Se enciende el segundo. Tharm, que entraba corriendo desde los camerinos, se dobla.</p>
+<p class="g-act-line">Y entonces una figura blanca sale del humo, por detrás de Cornelius. No vemos su cara. Le arranca el fajo de las manos y lo lanza entero al centro del fuego.</p>
+<p class="g-act-line">Luego se agacha sobre el baúl. Lo vemos desde dentro del baúl, a través de la ranura del doble fondo: dos manos pequeñas con guantes blancos sacan el contrato maestro.</p>
+<p class="g-note"><i>Nota de producción: el plano desde dentro del baúl es el de Ilya, escondido en el doble fondo. El espectador no lo sabe hasta la escena 15. En el puño de uno de los guantes se ve, durante dos fotogramas, una lágrima negra bordada.</i></p>
+<p class="g-act-line">El contrato maestro vuela hacia el fuego.</p>
+<p class="g-act-line">Cornelius grita. Un grito largo, que no es de dolor, sino de rabia.</p>
+<p class="g-act-line">Al fondo, en la salida de artistas, Augusta mete en la cerradura la llave de hierro. Está al rojo. Le quema los antebrazos. La puerta se abre.</p>
+<p class="g-act-line">Augusta da un paso para cruzarla. No puede. Es como si el aire fuera de piedra.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span><span class="g-par">(golpeando el aire con los puños)</span>¡No se puede salir! ¡No nos deja salir!</div>
+<p class="g-act-line">Y por primera vez en diez años, nadie se ríe.</p>
+<h4 class="g-scene">Escena 9. INT. CARPA PRINCIPAL — CONTINUACIÓN</h4>
+<p class="g-act-line">Los contratos arden en el centro de la pista. El fuego se vuelve blanco. Una ráfaga sale de la hoguera y recorre la carpa como una ola. Cada artista recibe de golpe el precio que pagó.</p>
+<p class="g-note"><i>Nota de producción: plano secuencia circular alrededor de la pista</i><i>. Cada transformación dura entre 3 y 5 segundos y se encadena con la siguiente. Al terminar, todos están en estado B.</i></p>
+<p class="g-act-line">A <b>AUGUSTA</b> el calor le derrite el maquillaje blanco. Debajo aparece su verdadero rostro: una chica de veintidós años, con la piel quemada y llena de hollín. La sonrisa pintada se le corre y se convierte en una mueca triste. La peluca naranja arde y cae: debajo, pelo castaño, corto, rapado a trasquilones. Se le cae el relleno del vestido: está delgadísima. Abre la boca para gritar y no le sale la risa de siempre. Le sale una voz ronca, suya.</p>
+<p class="g-act-line">A <b>EDMUND</b> se le derrite el blanco de la cara a chorretones. Debajo no hay una cara. Hay piel lisa y tirante, como cera fundida, sin cejas ni pestañas, y una boca que es casi una línea. El gorro se le ha caído: pelo rubio ceniza, rapado. Se lleva los guantes a la cara.</p>
+<p class="g-act-line">A <b>ROSALIND</b> le aparecen en el cuerpo, de golpe, todas las lesiones de diez años de trapecio que el contrato le escondía: moratones morados y amarillos, la clavícula mal soldada con un bulto, cicatrices de cuerda en las muñecas. Grita: le duelen todas a la vez. Se suelta del trapecio y cae sobre una lona en llamas. Se levanta cojeando.</p>
+<p class="g-act-line">A <b>ILYA</b>, dentro del baúl, le vuelve todo el dolor de cada postura imposible. Un hombro se le sale de su sitio. No puede salir del baúl. Se queda doblado dentro, gimiendo.</p>
+<p class="g-act-line">La barba de <b>BELLADONNA</b> suelta por fin las salidas. Las puntas están chamuscadas y han perdido todos los adornos. En sus muñecas quedan marcas oscuras circulares, como si su propia barba la hubiera atado. Las coletas se deshacen. El maquillaje se le corre por la cara.</p>
+<p class="g-act-line">A <b>THARM</b> se le alarga el rostro: ya no es una cara humana con escamas, es una cara de lagarto. Las quemaduras le cubren las manos y el pecho. El pelo engominado se le encrespa como cardado.</p>
+<p class="g-act-line">A <b>AGNES</b> el instinto la gana del todo: ojos inyectados, se mueve a cuatro patas un instante antes de ponerse en pie. Le aparecen cortes frescos en la cara y por todo el cuerpo, superficiales. El pelo, despeinado y negro de humo.</p>
+<p class="g-act-line">A <b>LUCIEN</b>, inconsciente contra los barrotes, se le cumple la cláusula. La quemadura le cruza la sien y la mejilla derechas. Las cejas, la nariz y la mandíbula se le proyectan hacia delante en un hocico corto de lobo. La mano derecha se le convierte en una garra; la izquierda sigue siendo humana. El pelo se le mezcla con pelaje gris y negro. El mechón plateado de la sien izquierda sigue ahí.</p>
+<p class="g-act-line">A <b>MADAME ECLIPSE</b> se le queman la mejilla y parte del cuello. El pómulo se le marca, la nariz se le deforma un poco y uno de sus ojos se vuelve de felino. Las uñas le crecen y rompen los guantes.</p>
+<p class="g-act-line">En los camerinos, <b>VOLTAIRINE</b> intenta alcanzar la salida y se cae de la silla, sobre el caldero de agua hirviendo que calentaba el maquillaje. Grita. Se arrastra por el suelo, apartando maderas en llamas con las manos.</p>
+<p class="g-act-line">En el centro de la pista, <b>CORNELIUS</b> envejece. Doscientos años en diez segundos. La piel se le arruga, se le seca, se le pega a los huesos. La chistera cae. Se desploma junto al baúl vacío.</p>
+<p class="g-act-line">El fuego se apaga de golpe, como si alguien hubiera soplado una vela.</p>
+<p class="g-act-line">Negro.</p>
+<h3 class="g-act" id="acto-3">Acto III · Las cenizas</h3>
+<h4 class="g-scene">Escena 10. EXT. RUINAS DE LA CARPA — AMANECER</h4>
+<p class="g-act-line">Luz gris. Niebla de mar. De la carpa solo quedan los mástiles negros y jirones de lona humeante. Las gradas, carbonizadas. Pero el círculo de serrín de la pista está intacto, dorado, como si el fuego no se hubiera atrevido a tocarlo.</p>
+<p class="g-act-line">En el centro, junto al baúl abierto y vacío, el cuerpo de Cornelius: un anciano reseco, encogido, con la piel como papel de estraza. Parece que lleva muerto doscientos años. La levita roja le queda enorme.</p>
+<p class="g-act-line">Uno a uno, los artistas se levantan de entre las cenizas. Todos en estado B.</p>
+<p class="g-act-line">Agnes arrastra a Lucien, inconsciente, desde las jaulas hasta el borde de la pista. Lo deja en el suelo. Le aparta el pelaje de la cara con una delicadeza que no le habíamos visto. Al notar que la miran, se aparta de golpe.</p>
+<p class="g-act-line">Tharm saca a Ilya del baúl. El contorsionista grita al estirarse: tiene el hombro fuera de su sitio. Tharm se lo coloca de un tirón. Ilya se desmaya un segundo y vuelve.</p>
+<p class="g-act-line">Desde los restos de los camerinos llega un ruido de maderas. Voltairine sale arrastrándose con los brazos. Media cabeza quemada, el pelo corto y chamuscado, el pañuelo morado atado sobre la cicatriz. El vestido desgarrado por abajo, las mangas desaparecidas, cicatrices recientes en manos y brazos. Nadie se mueve para ayudarla. Luego Belladonna corre hacia ella y le ofrece la barba para que se agarre. Voltairine se agarra.</p>
+<p class="g-act-line">Madame Eclipse sale del círculo y camina hacia el puerto. Al llegar a la línea de carromatos se detiene en seco: el mismo muro invisible de la noche anterior. Golpea el aire con el mango del látigo.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Seguimos dentro.</div>
+<div class="g-dlg" data-pj="ROSALIND"><span class="g-name">ROSALIND</span><span class="g-par">(cojeando, sujetándose el brazo)</span>Si los contratos han ardido, ¿por qué seguimos dentro?</div>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span><span class="g-par">(desde el suelo, castañeteando los dientes)</span>Porque la función no ha terminado. Nadie la ha cerrado.</div>
+<p class="g-act-line">Todos miran a Madame Eclipse. Ella es la directora de pista.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Entonces no la cierro hasta saber qué ha pasado aquí. Cornelius quería que estuviéramos los diez en esta pista. Alguien cerró las salidas. Alguien prendió fuego a la lona. Y alguien vació ese baúl. Cuando lo sepa, os dejo ir.</div>
+<p class="g-act-line">Edmund se ha quedado de pie junto al cadáver de su padre. Tiene la cara de cera vuelta hacia el suelo. Lleva los guantes chamuscados. No dice nada. Nunca dice nada.</p>
+<h4 class="g-scene">Escena 11. EXT. RUINAS DE LA CARPA, PISTA — AMANECER</h4>
+<p class="g-act-line">Madame Eclipse se sienta sobre el baúl vacío, como en un trono. Los demás, en círculo sobre el serrín.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Todos vimos la cerilla, Augusta.</div>
+<p class="g-act-line">Augusta, con el vestido chamuscado apretado contra el cuerpo como una manta, se pone en pie. Le tiemblan las manos, quemadas en los antebrazos. Ha perdido los guantes. Los zapatos gigantes no tienen suela.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span><span class="g-par">(con la voz ronca, nueva)</span>Era de cartón. Podéis cogerla, está por ahí. Ni siquiera se quemó.</div>
+<p class="g-par"><i>(saca algo del bolsillo y lo deja en el serrín)</i></p>
+<p class="g-act-line">Pero esto sí es mío. La llave de la salida de artistas. Se le cayó a él del abrigo ayer, cuando discutía con Voltairine. La cogí yo.</p>
+<div class="g-dlg" data-pj="THARM"><span class="g-name">THARM</span>¿Y por qué no abriste antes?</div>
+<p class="g-act-line">Augusta tarda en contestar.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span>Porque ayer encontré mi contrato. No ponía «juventud». Ponía «su vida». Él nunca pensó liberarme. Y cuando empezó el fuego pensé… <i>(se le quiebra la voz)</i> pensé que si nos quemábamos todos, al menos nadie volvería a reírse de mí.</div>
+<p class="g-act-line">Silencio.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span>Tardé lo que se tarda en contar hasta diez. Luego corrí. El hierro quemaba. Abrí la puerta. Y no se podía cruzar.</div>
+<p class="g-act-line">Rosalind la mira. Se le escapa una sonrisa sin querer. Luego otra persona sonríe. Augusta se tensa, esperando las carcajadas de siempre. No llegan.</p>
+<div class="g-dlg" data-pj="ROSALIND"><span class="g-name">ROSALIND</span>No me río de ti. Me río porque has dicho la verdad y nadie se ha reído.</div>
+<p class="g-act-line">Augusta se lleva la mano a la mejilla quemada. Luego al bolsillo: saca la nariz roja de verdad, la suya, la que recogió entre las llamas. Se la aprieta.</p>
+<h4 class="g-scene">Escena 12. EXT. RUINAS DE LA CARPA, PISTA — CONTINUACIÓN</h4>
+<p class="g-act-line">Belladonna se esconde detrás de su barba. Las puntas quemadas le tiemblan.</p>
+<div class="g-dlg" data-pj="BELLADONNA"><span class="g-name">BELLADONNA</span>Las puertas las cerré yo.</div>
+<p class="g-act-line">Todos se vuelven.</p>
+<div class="g-dlg" data-pj="BELLADONNA"><span class="g-name">BELLADONNA</span>Bueno. Mi barba. Yo quería pararla, de verdad. Tiré y tiré y no me soltaba.</div>
+<p class="g-par"><i>(se mira las marcas oscuras de las muñecas)</i></p>
+<p class="g-act-line">Pero antes de la función le dije una cosa. Bajito. Para que no lo oyera nadie.</p>
+<p class="g-act-line">Se acerca la barba a la boca. Esta vez sí la oímos.</p>
+<div class="g-dlg" data-pj="BELLADONNA"><span class="g-name">BELLADONNA</span>«Que nadie pueda abandonarme nunca más».</div>
+<p class="g-act-line">Ilya, que había dicho que se iba a París, baja la cabeza. Rosalind, que se iba a América, también.</p>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span><span class="g-par">(se levanta, con los ojos inyectados)</span>Casi nos matas a todos.</div>
+<div class="g-dlg" data-pj="BELLADONNA"><span class="g-name">BELLADONNA</span>Yo no quería que os murierais. Quería que os quedarais.</div>
+<div class="g-dlg" data-pj="THARM"><span class="g-name">THARM</span><span class="g-par">(sin mirar a nadie, rascándose las escamas quemadas)</span>Ella cerró las puertas. Pero no encendió nada. La lona ardió por las cuatro esquinas a la vez. Eso no se hace con una barba. Ni con una cerilla de cartón.</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>¿Y tú cómo lo sabes?</div>
+<p class="g-act-line">Tharm saca del bolsillo del pantalón una hoja arrugada y chamuscada por los bordes. La despliega sobre el serrín.</p>
+<h4 class="g-scene">Escena 13. EXT. RUINAS DE LA CARPA, PISTA — CONTINUACIÓN</h4>
+<p class="g-act-line">La página del cuaderno de Cornelius: el plano de la carpa con cuatro cruces rojas y la anotación.</p>
+<div class="g-dlg" data-pj="THARM"><span class="g-name">THARM</span>Anoche entré en su carromato a buscar mi contrato. Encontré esto. Bidones de petróleo bajo las gradas y mechas lentas en las cuatro esquinas. Las encendió antes del intermedio. Lo preparó él.</div>
+<div class="g-dlg" data-pj="ILYA"><span class="g-name">ILYA</span><span class="g-par">(leyendo, con acento ruso)</span>«Los diez dentro del círculo. Los contratos ardiendo en mi mano, uno a uno, diciendo su nombre. Lo que me dieron volverá a mí».</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>No quería liberarnos. Quería cobrarse lo que nos quitó. Todo junto. Y volver a ser joven.</div>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span><span class="g-par">(despertándose; con una voz grave, medio animal)</span>Por eso la cláusula. Si el contrato se rompe y no lo quema él… lo que nos dio se queda. Y nos devora.</div>
+<p class="g-act-line">Se mira la mano derecha convertida en garra. La izquierda sigue siendo la suya.</p>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>Yo te saqué de la jaula. No te muevas, que sangras.</div>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>Tú abriste las jaulas.</div>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>Para que los leones abrieran paso al público. Llevo veinte años siendo el animal de alguien. Anoche no iba a dejar que se quemaran los de verdad.</div>
+<p class="g-act-line">Lucien la mira mucho rato. Asiente. Después se vuelve hacia Madame Eclipse.</p>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>Y tú ibas a enfrentarte a él. Lo dijiste en las jaulas.</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Iba a hacerle leer la letra pequeña delante de todos. Con el látigo si hacía falta. No me dio tiempo. <i>(se toca el ojo de felino)</i> Llevo años sabiendo que nunca nos iba a soltar. Y aun así le hice la presentación cada noche.</div>
+<p class="g-act-line">Lucien se fija otra vez en ella, en sus facciones bajo las quemaduras.</p>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>Tu apellido es Moreau.</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Y tú cómo lo sabes.</div>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span><span class="g-par">(abre el medallón de latón: dentro, el retrato de un hombre)</span>Émile Moreau. Mi padre. Mi padre tenía un hermano en Lyon que criaba caballos.</div>
+<p class="g-act-line">Madame Eclipse tarda en contestar.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Mi abuelo.</div>
+<h4 class="g-scene">Escena 14. EXT. RUINAS DE LA CARPA, PISTA — CONTINUACIÓN</h4>
+<p class="g-act-line">Voltairine pide que la acerquen al cadáver. Belladonna y Ilya la llevan entre los dos.</p>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span>Me pidió que os dijera que no salierais de la pista. Que os traería mala suerte. Me negué. Y le maldije.</div>
+<p class="g-par"><i>(mira el cuerpo)</i></p>
+<p class="g-act-line">Le deseé que se secara como una rama vieja. Y mirad.</p>
+<div class="g-dlg" data-pj="ILYA"><span class="g-name">ILYA</span>¿Tú le mataste?</div>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span>No lo sé. Mis maldiciones no siempre funcionan. Mis profecías tampoco. Me invento la mitad.</div>
+<p class="g-par"><i>(pausa)</i></p>
+<p class="g-act-line">El pescador no va a volver el martes.</p>
+<p class="g-act-line">Le coge la mano al cadáver. Recorre las líneas con el dedo. Deja de castañetear los dientes. Cierra los ojos.</p>
+<p class="g-act-line">Inserto. VISIÓN DE VOLTAIRINE, en blanco y negro y sin sonido: el humo, el fuego blanco. Unas manos pequeñas con guantes blancos le quitan a Cornelius el fajo de contratos. Cornelius se gira hacia quien sea. Sus labios dicen una sola palabra: «Hijo».</p>
+<p class="g-act-line">Voltairine abre los ojos. No dice nada. Busca con la mirada a alguien. No lo encuentra: Edmund ya no está junto al cadáver. Está de espaldas, al borde del círculo, mirando el mar.</p>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span><span class="g-par">(muy bajo, solo para Belladonna)</span>Esta vez no me lo he inventado.</div>
+<h3 class="g-act" id="acto-4">Acto IV · La revelación</h3>
+<h4 class="g-scene">Escena 15. EXT. RUINAS DE LA CARPA, PISTA — MAÑANA</h4>
+<p class="g-act-line">La niebla empieza a levantarse. Se ve el mar, gris, detrás de los carromatos.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Cornelius prendió el fuego. Belladonna cerró las puertas. Augusta tardó diez segundos en abrir la suya. Pero alguien le quitó los contratos de las manos antes de que terminara. Si no, ahora mismo seríamos ceniza y él tendría veinte años.</div>
+<div class="g-dlg" data-pj="ROSALIND"><span class="g-name">ROSALIND</span><span class="g-par">(sujetándose la clavícula)</span>Yo lo vi. Desde el trapecio. Una figura blanca. Salió del humo por detrás de él y lanzó todo el fajo al fuego. No le vi la cara.</div>
+<p class="g-act-line">Todos se miran entre sí. Blanco: el vestido crema de Belladonna, la blúsa de Pierrot, los guantes de Augusta.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span>Mis guantes se quemaron en la puerta. Están allí.</div>
+<p class="g-act-line">Señala la salida de artistas: dos guantes blancos enormes, carbonizados, pegados al tirador de hierro.</p>
+<div class="g-dlg" data-pj="ILYA"><span class="g-name">ILYA</span><span class="g-par">(muy despacio, con el hombro vendado)</span>No eran guantes grandes.</div>
+<p class="g-act-line">Todos se vuelven hacia él.</p>
+<div class="g-dlg" data-pj="ILYA"><span class="g-name">ILYA</span>Yo estaba dentro del baúl.</div>
+<p class="g-par"><i>(ante las caras)</i></p>
+<p class="g-act-line">En el intermedio entré en el carromato a robar mi contrato, cuando salió Tharm. Encontré el doble fondo. Me metí dentro para buscar mejor, y entraron los mozos a llevarse el baúl. No podía salir sin que me vieran. Así que me doblé. Para eso me pagan.</p>
+<p class="g-par"><i>(pausa)</i></p>
+<p class="g-act-line">Desde la ranura vi unas manos coger el contrato maestro. Eran pequeñas. Guantes blancos, a medida. Y en el puño de uno tenían bordada una lágrima negra.</p>
+<p class="g-act-line">Silencio absoluto. Uno a uno, todos los ojos se vuelven hacia el borde del círculo.</p>
+<p class="g-act-line">Allí, de espaldas, mirando el mar, está Edmund. Se mira los guantes chamuscados. En el puño del izquierdo, entre el hollín, todavía se ve la lágrima negra.</p>
+<p class="g-act-line">Se da la vuelta. Su cara de cera no puede expresar nada. Pero abre la boca.</p>
+<p class="g-act-line">Y habla. Por primera vez en la película. Tiene la voz rota, como una puerta que no se abre desde hace años.</p>
+<div class="g-dlg" data-pj="EDMUND"><span class="g-name">EDMUND</span>Fui yo.</div>
+<p class="g-note"><i>Nota de producción: es la primera frase de Edmund en todo el guion. El sonido debe quedar seco, sin música. Hasta aquí, el público ha visto a Pierrot como parte del decorado.</i></p>
+<h4 class="g-scene">Escena 16. EXT. RUINAS DE LA CARPA, PISTA — CONTINUACIÓN</h4>
+<p class="g-act-line">Edmund camina hasta el cadáver de Cornelius. Se arrodilla. Le coloca bien la levita, que le queda grande.</p>
+<div class="g-dlg" data-pj="EDMUND"><span class="g-name">EDMUND</span>Me llamo Edmund Ravenhall. Era su hijo. Mi madre era la primera Golondrina. Murió cayendo del trapecio, sin red, cuando yo tenía seis años.</div>
+<p class="g-par"><i>(mira a Rosalind)</i></p>
+<p class="g-act-line">A los ocho me hizo firmar. Hacer llorar a quien me mire. A cambio, mi cara. Desde entonces no tengo cara. Tengo esto. <i>(se toca la piel lisa)</i> Por eso me pinto. Y dejé de hablar, porque todo lo que yo decía, él lo convertía en número.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>¿Sabías lo que iba a hacer?</div>
+<div class="g-dlg" data-pj="EDMUND"><span class="g-name">EDMUND</span>Le limpiaba el carromato. Leí el cuaderno hace un mes. Anoche, en el intermedio, entré a por el contrato maestro, pero había alguien escondido detrás de la puerta.</div>
+<p class="g-par"><i>(Tharm baja la mirada.)</i></p>
+<p class="g-act-line">Así que esperé al fuego. Cuando empezó a decir vuestros nombres, le quité los contratos y los tiré enteros a la hoguera. No los quemó él. Así que no volvieron a él. Volvieron a vosotros.</p>
+<p class="g-par"><i>(mira el baúl)</i></p>
+<p class="g-act-line">Y después quemé el suyo. El contrato maestro. Era lo que le mantenía vivo. Llevaba doscientos años comiendo de los nuestros.</p>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>Lo mataste.</div>
+<div class="g-dlg" data-pj="EDMUND"><span class="g-name">EDMUND</span>Sí.</div>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span><span class="g-par">(levantándose, con la garra temblando)</span>Y nos condenaste a esto. La cláusula. Lo que nos dio no se ha ido. Mira lo que soy.</div>
+<div class="g-dlg" data-pj="EDMUND"><span class="g-name">EDMUND</span>Lo que él os dio era suyo, y no lo podía devolver nadie. Lo que os quitó era vuestro. Eso sí. <i>(señala a Augusta)</i> Mira su cara.</div>
+<p class="g-act-line">Todos miran a Augusta: la cara quemada, sí, pero de una chica de veintidós años.</p>
+<p class="g-act-line">Agnes da un paso hacia Edmund, con las garras abiertas. Madame Eclipse chasquea el látigo en el suelo, entre los dos. Agnes se detiene. Por costumbre. Y se odia por haberse detenido.</p>
+<div class="g-dlg" data-pj="AGNES"><span class="g-name">AGNES</span>No me vuelvas a domar.</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>No te domo. Te pido que esperes.</div>
+<p class="g-act-line">Augusta se pone en pie. Se coloca junto a Edmund. Le llega por el hombro.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span>Yo siempre digo la verdad y todos se ríen. Así que ahora, que nadie se ríe, la digo otra vez. Anoche Cornelius iba a matarnos a los diez. Edmund mató a uno. A su padre. Para que viviéramos los otros nueve.</div>
+<p class="g-act-line">Nadie se ríe. Belladonna rompe a llorar. Su barba se estira sola y le acaricia la mano a Edmund, como hace con la gente que le cae bien.</p>
+<h3 class="g-act" id="acto-5">Acto V · Fin de la función</h3>
+<h4 class="g-scene">Escena 17. EXT. RUINAS DE LA CARPA, PISTA — MAÑANA</h4>
+<p class="g-act-line">Sale el sol entre la niebla. Por primera vez, la luz es dorada y no gris.</p>
+<p class="g-act-line">Madame Eclipse se pone en pie en el centro de la pista, junto al baúl. Se arregla lo que queda de la chaqueta roja. Se yergue. Desenrolla el látigo.</p>
+<p class="g-note"><i>Nota de producción: los personajes siguen en estado B, con el desgaste máximo de la noche: hollín, sangre seca, pelo apelmazado y vestuario roto. Es la escena más &quot;sucia&quot; de la película, pero la luz es la más cálida.</i></p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span><span class="g-par">(con voz de pista, a unas gradas que ya no existen)</span>Señoras y señores. El Circo Ravenhall agradece su atención.</div>
+<p class="g-par"><i>(pausa)</i></p>
+<p class="g-act-line">La función ha terminado.</p>
+<p class="g-act-line">Chasquea el látigo. El sonido rebota contra los carromatos. Una gaviota cruza la línea de carromatos, por encima del muro invisible, y sigue volando hacia el mar.</p>
+<p class="g-act-line">Agnes es la primera en atreverse. Camina descalza hasta la línea. La cruza. No pasa nada. Se queda quieta, al otro lado, con los ojos cerrados, como quien escucha algo por primera vez.</p>
+<p class="g-act-line">Uno a uno, los demás se levantan.</p>
+<p class="g-act-line"><b>Las despedidas, en planos cortos:</b></p>
+<p class="g-act-line"><b>Los domadores.</b> Lucien silba. El lobo gris sale de entre los restos de las gradas y se le pone al lado. Lucien le toca el hocico con la mano humana. Agnes se acerca y, sin decir nada, se coloca al otro lado del lobo. Madame Eclipse los alcanza.</p>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>La finca de Lyon todavía tiene cuadras.</div>
+<div class="g-dlg" data-pj="LUCIEN"><span class="g-name">LUCIEN</span>¿Y sitio para algo como yo?</div>
+<div class="g-dlg" data-pj="MADAME ECLIPSE"><span class="g-name">MADAME ECLIPSE</span>Para la familia siempre hay sitio.</div>
+<p class="g-act-line">Agnes se queda un paso atrás. Lucien se vuelve y la espera. Agnes no sabe qué hacer con eso. Al final, camina con ellos.</p>
+<p class="g-act-line"><b>Los acróbatas.</b> Ilya, con el brazo en cabestrillo, encuentra entre los restos una silla de la orquesta, intacta. La lleva hasta el muelle. Se sienta. Cierra los ojos y sonríe. Rosalind se sienta a su lado, en el suelo, cojeando, y apoya la cabeza en su rodilla.</p>
+<div class="g-dlg" data-pj="ROSALIND"><span class="g-name">ROSALIND</span>América puede esperar un año.</div>
+<p class="g-act-line"><b>Los fenómenos.</b> Tharm se acerca a la orilla. Se mira las manos de lagarto quemadas. Se rasca las escamas. Para. Por primera vez en la película, levanta la cabeza y mira a alguien a los ojos: a Belladonna.</p>
+<div class="g-dlg" data-pj="THARM"><span class="g-name">THARM</span>Nadie se va a ir sin despedirse de ti. Te lo prometo.</div>
+<p class="g-act-line">Belladonna se esconde tras la barba. Luego sale y le da la mano.</p>
+<p class="g-act-line"><b>El ilusionismo.</b> Voltairine, sentada en el serrín, se mira las piernas. Mueve un dedo del pie. Luego otro. Le tiembla la boca. Belladonna y Augusta la sujetan una de cada brazo. Voltairine se pone de pie, por primera vez en años. Da un paso. Se tambalea. Da otro.</p>
+<div class="g-dlg" data-pj="VOLTAIRINE"><span class="g-name">VOLTAIRINE</span><span class="g-par">(sin castañetear los dientes)</span>Esto no lo había visto venir.</div>
+<h4 class="g-scene">Escena 18. EXT. ORILLA DEL PUERTO DE SALTMARSH — MAÑANA</h4>
+<p class="g-act-line">Augusta camina hasta el agua. Se quita los zapatos gigantes sin suela. Se arrodilla en la orilla y se lava la cara con agua de mar. El hollín se va. La quemadura de la mejilla sigue ahí. Debajo, una cara de veintidós años.</p>
+<p class="g-act-line">Se mira en el agua. Sonríe. Una sonrisa pequeña, suya. Y se ríe: una risa corta, ronca, de verdad. La primera en diez años.</p>
+<p class="g-act-line">Detrás de ella llega Edmund. Se ha quedado el último. Lleva en la mano la chistera de su padre. La deja en el agua y la mira alejarse flotando.</p>
+<p class="g-act-line">Se sienta junto a Augusta. Su cara de cera no puede llorar ni sonreír.</p>
+<p class="g-act-line">Augusta coge un poco de hollín de su propio vestido. Con el dedo, despacio, le dibuja a Edmund en la cara lisa una sonrisa. No la de un payaso. Una pequeña.</p>
+<div class="g-dlg" data-pj="AUGUSTA"><span class="g-name">AUGUSTA</span>Así. Hasta que te salga sola.</div>
+<p class="g-act-line">Edmund se toca la sonrisa con los guantes. No dice nada. No hace falta.</p>
+<p class="g-act-line">Detrás de ellos, en el descampado, el viento se lleva el serrín del círculo de la pista. Ya no es más que serrín.</p>
+<p class="g-end">FUNDIDO A NEGRO.</p>
+<p class="g-end">FIN</p>
+    </article>
   </section>
 
   <section role="tabpanel" id="p-familias" aria-labelledby="t-familias" hidden>
@@ -267,6 +629,18 @@ tr:last-child td{border-bottom:0}
       <div class="box"><span class="label">Parte 3</span><h3>Cronograma</h3><p class="note">Fechas de inicio y entrega de cada fase, las tres presentaciones marcadas y margen antes de UT4 y UT5.</p></div>
     </div>
   </section>
+  <section role="tabpanel" id="p-fichas" aria-labelledby="t-fichas" hidden>
+    <p class="note" style="text-align:center;max-width:66ch;margin-inline:auto">Aquí vive la documentación visual de tu personaje. Todo lo que subas a tu carpeta de Drive aparece en tu ficha. Al principio solo tú puedes ver la tuya.</p>
+    <div class="fx-how">
+      <div class="box"><span class="label">Referencias</span><h3 style="font-size:18px">Tu moodboard</h3><p class="note">Sube a tu carpeta todas las imágenes de referencia que quieras, con cualquier nombre. Aparecen juntas, sin orden.</p></div>
+      <div class="box"><span class="label">Bocetos</span><h3 style="font-size:18px">Thumbnails y bocetos</h3><p class="note">Pon al principio del nombre <code>BOCETO_</code>. Ej.: <code>BOCETO_siluetas_01.jpg</code></p></div>
+      <div class="box"><span class="label">Character Sheet</span><h3 style="font-size:18px">La lámina final</h3><p class="note">Pon al principio del nombre <code>CS_</code>. Ej.: <code>CS_Augusta_v01.pdf</code>. Puede ser imagen o PDF.</p></div>
+    </div>
+    <div id="fx-teacher"></div>
+    <div id="fx-main"></div>
+    <div id="fx-gal"></div>
+  </section>
+
 </div>
 
 <script>
@@ -315,7 +689,16 @@ function show(name){tabs.forEach(t=>{const on=t.id==="t-"+name;t.setAttribute("a
 tabs.forEach(t=>t.addEventListener("click",()=>show(t.id.slice(2))));
 document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();show(a.dataset.go)}));
 (()=>{let h=(location.hash||"").slice(1);let s=null;try{s=localStorage.getItem("rh-tab")}catch(e){}
-  const n=["historia","familias","reparto","personaje"];show(n.includes(h)?h:(n.includes(s)?s:"historia"))})();
+  const n=["historia","guion","familias","reparto","personaje","fichas"];show(n.includes(h)?h:(n.includes(s)?s:"historia"))})();
+
+/* guion: resaltar personaje */
+(()=>{const g=$("#guion"),sel=$("#g-pj");
+  [...new Set([...g.querySelectorAll(".g-dlg")].map(d=>d.dataset.pj))].sort((a,b)=>a.localeCompare(b,"es")).forEach(n=>sel.append(el("option",{value:n,text:n.charAt(0)+n.slice(1).toLowerCase()})));
+  sel.addEventListener("change",()=>{const v=sel.value;g.classList.toggle("filtering",!!v);
+    g.querySelectorAll(".g-dlg").forEach(d=>d.classList.toggle("hl",!!v&&d.dataset.pj===v));
+    const f=g.querySelector(".hl");if(f)f.scrollIntoView({behavior:"smooth",block:"center"})});
+  document.querySelectorAll(".g-chip").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();document.querySelector(a.getAttribute("href")).scrollIntoView({behavior:"smooth"})}));
+})();
 
 /* state */
 const S={remote:false,pin:"",local:false,claims:{},db:null,user:null,uid:null,canAdmin:false,ready:false,openFam:null,claiming:null,err:"",offline:false};
@@ -461,7 +844,7 @@ function renderLedger(){
   else if(S.local)sync.textContent=total+" de 10 alumnas con personaje reservado · modo local: se guarda solo en este navegador. Para compartirlo en directo, abre la web desde claude.ai con tu cuenta.";
   else sync.textContent=total+" de 10 alumnas con personaje reservado · se actualiza en directo.";
 }
-function renderAll(){renderFams();renderDetail();renderLedger();if(window.__storyReady){buildStory();roleOptions()}}
+function renderAll(){renderFams();renderDetail();renderLedger();if(typeof renderFichas==="function")renderFichas(false);if(window.__storyReady){buildStory();roleOptions()}}
 renderAll();
 
 
@@ -552,6 +935,112 @@ window.__storyReady=true;buildStory();
 function loadLocal(){try{const v=JSON.parse(localStorage.getItem("rh-reparto")||"{}");return v&&typeof v==="object"?v:{}}catch(e){return {}}}
 function saveLocal(){try{localStorage.setItem("rh-reparto",JSON.stringify(S.claims))}catch(e){S.err="Este navegador no permite guardar datos.";}}
 function goLocal(){S.local=true;S.offline=false;S.claims=loadLocal();S.ready=true;renderAll()}
+/* ===== FICHAS ===== */
+const F={id:"",clave:"",ficha:null,fichas:null,galeria:false,conClave:[],busy:false,msg:"",ok:false,verGal:false};
+try{const o=JSON.parse(sessionStorage.getItem("rh-ficha")||"{}");F.id=o.id||"";F.clave=o.clave||""}catch(e){}
+const famColor=id=>(famOf(id)||{c:"var(--gold)"}).c;
+const pjName=c=>c.personaje||((famOf(c.fam)||{roles:[]}).roles.find(r=>r.id===c.id)||{}).name||c.roleName||c.id;
+function img(o,cls){const a=el("a",{href:"https://drive.google.com/file/d/"+o.id+"/view",target:"_blank",rel:"noopener",title:o.n});
+  const i=el("img",{src:"https://drive.google.com/thumbnail?id="+o.id+"&sz=w800",alt:o.n,loading:"lazy",referrerpolicy:"no-referrer"});
+  i.addEventListener("error",()=>{if(!i.dataset.f){i.dataset.f=1;i.src="https://lh3.googleusercontent.com/d/"+o.id+"=w800"}},{once:false});
+  a.append(i);return a}
+function grid(list,big){return el("div",{class:"mood"+(big?" big":"")},list.map(o=>img(o)))}
+function block(title,list,empty,big){return el("div",{class:"fx-block"},[el("h3",{text:title+(list.length?" · "+list.length:"")}),list.length?grid(list,big):el("p",{class:"empty",text:empty})])}
+function fxMsg(){return F.msg?el("p",{class:F.ok?"msg-ok":"msg-bad",text:F.msg}):null}
+async function fxCall(p){const r=await fetch(SHEET_URL,{method:"POST",body:JSON.stringify(p)});return r.json()}
+function saveSess(){try{sessionStorage.setItem("rh-ficha",JSON.stringify({id:F.id,clave:F.clave}))}catch(e){}}
+
+function renderFichas(force){
+  const main=$("#fx-main");if(!main)return;
+  renderTeacherFx();
+  if(!S.remote){main.replaceChildren(el("p",{class:"banner",text:"Las fichas solo funcionan con la hoja del profesor conectada."}));return}
+  if(F.ficha){if(force!==false)drawFicha();return}
+  const sel=$("#fx-pj");
+  if(sel&&(document.activeElement===sel||document.activeElement===$("#fx-clave")||document.activeElement===$("#fx-clave2"))&&!force)return;
+  drawLogin();
+}
+function drawLogin(){
+  const main=$("#fx-main");const prev=($("#fx-pj")||{}).value||F.id;const pv=($("#fx-clave")||{}).value||"";
+  const list=Object.values(S.claims).sort((a,b)=>pjName(a).localeCompare(pjName(b),"es"));
+  const sel=el("select",{id:"fx-pj"},[el("option",{value:"",text:"Elige tu personaje"}),...list.map(c=>el("option",{value:c.id,text:pjName(c)+" · "+c.alumna}))]);
+  sel.value=prev||"";
+  const nueva=sel.value&&!F.conClave.includes(sel.value);
+  const form=el("form",{class:"fx-login"},[
+    el("span",{class:"label",text:"Entrar en tu ficha"}),
+    el("div",{class:"row"},[el("label",{for:"fx-pj",class:"label",text:"Personaje"}),sel]),
+    el("div",{class:"row"},[el("label",{for:"fx-clave",class:"label",text:nueva?"Crea tu contraseña (mínimo 4 caracteres)":"Contraseña"}),el("input",{id:"fx-clave",type:"password",autocomplete:nueva?"new-password":"current-password",required:"",minlength:"4",maxlength:"60"})]),
+    nueva?el("div",{class:"row"},[el("label",{for:"fx-clave2",class:"label",text:"Repite la contraseña"}),el("input",{id:"fx-clave2",type:"password",autocomplete:"new-password",required:"",maxlength:"60"})]):null,
+    fxMsg(),
+    el("div",{class:"fx-acts"},[el("button",{class:"btn",type:"submit",text:F.busy?"Un momento…":(nueva?"Crear contraseña y entrar":"Entrar"),disabled:F.busy?"":null})]),
+    el("p",{class:"note",text:"Puede tardar hasta 30 segundos."})
+  ]);
+  sel.addEventListener("change",()=>{F.msg="";drawLogin()});
+  form.addEventListener("submit",async e=>{e.preventDefault();const id=sel.value,cl=$("#fx-clave").value;
+    if(!id){F.msg="Elige tu personaje.";F.ok=false;drawLogin();return}
+    if(nueva&&cl!==$("#fx-clave2").value){F.msg="Las dos contraseñas no coinciden.";F.ok=false;drawLogin();return}
+    F.busy=true;F.msg="";drawLogin();
+    try{
+      if(nueva){const r=await fxCall({action:"clave",id,clave:cl});
+        if(!r.ok&&r.error!=="existe"){F.busy=false;F.msg=r.error==="corta"?"La contraseña debe tener al menos 4 caracteres.":"No se pudo crear la contraseña.";F.ok=false;drawLogin();return}
+        if(r.ok)F.conClave.push(id)}
+      const r=await fxCall({action:"ficha",id,clave:cl});F.busy=false;
+      if(!r.ok){F.msg=r.error==="clave"?"Contraseña incorrecta.":"No se pudo abrir la ficha.";F.ok=false;drawLogin();return}
+      F.id=id;F.clave=cl;F.ficha=r.ficha;F.galeria=r.galeria;F.msg="";saveSess();drawFicha();
+    }catch(err){F.busy=false;F.msg="No hay conexión con la hoja. Inténtalo de nuevo.";F.ok=false;drawLogin()}
+  });
+  main.replaceChildren(form);
+  if(pv)$("#fx-clave").value=pv;
+}
+function drawFicha(){
+  const f=F.ficha,main=$("#fx-main");
+  const reload=async()=>{F.busy=true;drawFicha();try{const r=await fxCall({action:"ficha",id:F.id,clave:F.clave});if(r.ok){F.ficha=r.ficha;F.galeria=r.galeria}}catch(e){}F.busy=false;drawFicha()};
+  const out=()=>{F.ficha=null;F.fichas=null;F.clave="";F.verGal=false;saveSess();$("#fx-gal").replaceChildren();drawLogin()};
+  const n=f.img.cs.length+f.img.bocetos.length+f.img.refs.length;
+  main.replaceChildren(el("div",{class:"detail",style:"--fc:"+famColor(f.fam)},[
+    el("div",{class:"fx-head"},[el("div",{},[el("span",{class:"label",text:(famOf(f.fam)||{n:""}).n+" · "+f.alumna}),el("h2",{text:pjName(f)})]),
+      el("div",{class:"fx-acts"},[f.carpeta?el("a",{class:"btn",href:f.carpeta,target:"_blank",rel:"noopener",text:"Abrir mi carpeta ↗"}):null,
+        el("button",{class:"btn ghost",type:"button",text:F.busy?"Actualizando…":"Actualizar",onclick:reload}),
+        el("button",{class:"btn ghost",type:"button",text:"Salir",onclick:out})])]),
+    !f.tieneCarpeta?el("p",{class:"banner",text:"El profesor todavía no ha creado tu carpeta de Drive. Cuando la tengas, tus imágenes aparecerán aquí."}):null,
+    f.tieneCarpeta&&!n?el("p",{class:"banner",text:"Tu carpeta está vacía. Sube tus imágenes y pulsa «Actualizar» (pueden tardar un minuto en aparecer)."}):null,
+    block("Character Sheet",f.img.cs,"Todavía no hay ningún archivo que empiece por CS_.",true),
+    block("Bocetos y thumbnails",f.img.bocetos,"Todavía no hay ningún archivo que empiece por BOCETO_."),
+    block("Moodboard de referencias",f.img.refs,"Todavía no hay imágenes de referencia."),
+    F.galeria?el("div",{class:"fx-acts"},[el("button",{class:"btn",type:"button",text:F.verGal?"Ocultar la galería de la clase":"Ver la galería de la clase",onclick:()=>{F.verGal=!F.verGal;if(F.verGal)loadGal();else $("#fx-gal").replaceChildren();drawFicha()}})]):null
+  ]));
+}
+async function loadGal(asTeacher){
+  const g=$("#fx-gal");g.replaceChildren(el("p",{class:"note",style:"text-align:center",text:"Cargando la galería… puede tardar hasta 30 segundos."}));
+  try{const r=await fxCall(asTeacher?{action:"galeria",pin:S.pin}:{action:"galeria",id:F.id,clave:F.clave});
+    if(!r.ok){g.replaceChildren(el("p",{class:"msg-bad",text:r.error==="pin"||r.error==="clave"?"Código incorrecto.":r.error==="cerrada"?"La galería está cerrada.":"No se pudo cargar la galería."}));return}
+    drawGal(r.fichas,asTeacher)}catch(e){g.replaceChildren(el("p",{class:"msg-bad",text:"No hay conexión con la hoja."}))}
+}
+function drawGal(list,asTeacher){
+  const g=$("#fx-gal");
+  list.sort((a,b)=>FAM.findIndex(f=>f.id===a.fam)-FAM.findIndex(f=>f.id===b.fam)||String(a.id).localeCompare(String(b.id)));
+  g.replaceChildren(el("h2",{style:"text-align:center;font-size:28px",text:asTeacher?"Todas las fichas":"La galería de la clase"}),
+    ...list.map(f=>{const all=[...f.img.cs,...f.img.bocetos,...f.img.refs];
+      return el("div",{class:"fx-card",style:"--fc:"+famColor(f.fam)},[
+        el("div",{class:"fx-head",style:"border:0;padding:0"},[el("div",{},[el("span",{class:"label",text:(famOf(f.fam)||{n:""}).n+" · "+f.alumna}),el("h3",{text:pjName(f)})]),
+          el("div",{class:"fx-acts"},[el("span",{class:"tag",text:all.length+" imágenes"}),asTeacher&&f.carpeta?el("a",{class:"btn ghost",href:f.carpeta,target:"_blank",rel:"noopener",text:"Carpeta ↗"}):null,asTeacher&&!f.tieneCarpeta?el("span",{class:"tag",text:"Sin carpeta"}):null])]),
+        f.img.cs.length?block("Character Sheet",f.img.cs,"",true):null,
+        f.img.bocetos.length?block("Bocetos",f.img.bocetos,""):null,
+        f.img.refs.length?block("Moodboard",f.img.refs,""):null,
+        !all.length?el("p",{class:"empty",text:"Todavía sin imágenes."}):null])}));
+}
+async function fxResume(){if(!F.id||!F.clave||F.ficha)return;
+  try{const r=await fxCall({action:"ficha",id:F.id,clave:F.clave});if(r.ok){F.ficha=r.ficha;F.galeria=r.galeria;drawFicha()}else{F.clave="";saveSess()}}catch(e){}}
+function renderTeacherFx(){
+  const t=$("#fx-teacher");if(!t)return;
+  if(!S.remote||!S.pin){t.replaceChildren();return}
+  if(t.dataset.k===String(F.galeria)+S.pin)return;t.dataset.k=String(F.galeria)+S.pin;
+  const st=el("span",{class:"note",text:"Modo profesor · galería "+(F.galeria?"abierta: todas ven todas las fichas.":"cerrada: cada alumna solo ve la suya.")});
+  const tog=el("button",{class:"btn",type:"button",text:F.galeria?"Cerrar galería":"Abrir galería",onclick:async()=>{tog.disabled=true;tog.textContent="Un momento…";
+    try{const r=await fxCall({action:"abrirGaleria",pin:S.pin,abierta:!F.galeria});if(r.ok)F.galeria=r.galeria;else st.textContent="Código del profesor incorrecto."}catch(e){st.textContent="No hay conexión con la hoja."}
+    t.dataset.k="";renderTeacherFx();if(F.ficha)drawFicha()}});
+  t.replaceChildren(el("div",{class:"fx-teacher"},[st,el("div",{class:"fx-acts"},[tog,el("button",{class:"btn ghost",type:"button",text:"Ver todas las fichas",onclick:()=>loadGal(true)})])]));
+}
+
 /* Google Sheets backend */
 async function api(payload){
   const r=await fetch(SHEET_URL,{method:"POST",body:JSON.stringify(payload)});
@@ -562,6 +1051,7 @@ async function refresh(){
     const r=await (await fetch(SHEET_URL+"?t="+Date.now())).json();
     const m={};(r.claims||[]).forEach(c=>{if(c&&c.id&&c.alumna)m[c.id]={...c,custom:c.custom===true||c.custom==="TRUE"||c.custom==="true"}});
     S.claims=m;S.ready=true;S.offline=false;
+    if(Array.isArray(r.conClave))F.conClave=r.conClave.map(String);if(typeof r.galeria==="boolean")F.galeria=r.galeria;
   }catch(e){S.ready=true;S.offline=true}
   renderAll();
 }
@@ -577,7 +1067,7 @@ function teacherBox(){
 }
 /* live data */
 (async()=>{
-  if(SHEET_URL){S.remote=true;teacherBox();await refresh();setInterval(()=>{if(!document.hidden&&!S.claiming)refresh()},15000);return}
+  if(SHEET_URL){S.remote=true;teacherBox();await refresh();fxResume();setInterval(()=>{if(!document.hidden&&!S.claiming)refresh()},15000);return}
   try{
     const [db,user]=await Promise.all([window.claude?.use?.("db")??null,window.claude?.use?.("user")??null]);
     S.db=db;S.user=user;
